@@ -1,0 +1,27 @@
+{
+  "expo": {
+    "name": "Family Home",
+    "slug": "family-home-app",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "icon": "./src/assets/icon.png",
+    "userInterfaceStyle": "light",
+    "scheme": "familyhome",
+    "splash": {
+      "backgroundColor": "#FFF8F0"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.familyhome.app"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#FFF8F0"
+      },
+      "package": "com.familyhome.app"
+    },
+    "web": {
+      "bundler": "metro"
+    }
+  }
+}
