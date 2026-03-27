@@ -5,24 +5,28 @@ import { Task, TaskCategory } from '../types';
 
 const CATEGORY_EMOJI: Record<TaskCategory, string> = {
   kitchen: '🍳',
-  laundry: '👕',
-  toys: '🧸',
-  cleaning: '✨',
-  bedtime: '🌙',
-  school: '📚',
+  dining_room: '🍽️',
+  living_room: '🛋️',
+  master_bedroom: '🛏️',
+  master_bathroom: '🚿',
+  bathroom: '🪥',
+  office: '💻',
+  stairwell: '🪜',
   outdoor: '🌿',
-  admin: '📋',
+  general: '📋',
 };
 
 const CATEGORY_COLOR: Record<TaskCategory, string> = {
   kitchen: colors.kitchen,
-  laundry: colors.laundry,
-  toys: colors.toys,
-  cleaning: colors.cleaning,
-  bedtime: colors.bedtime,
-  school: colors.school,
+  dining_room: '#FFB347',
+  living_room: '#FF8B8B',
+  master_bedroom: colors.bedtime,
+  master_bathroom: colors.laundry,
+  bathroom: '#87CEEB',
+  office: '#8BB8FF',
+  stairwell: '#AEB6BF',
   outdoor: colors.outdoor,
-  admin: colors.admin,
+  general: colors.cleaning,
 };
 
 interface TaskCardProps {

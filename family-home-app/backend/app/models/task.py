@@ -13,6 +13,7 @@ class TaskStatus(str, Enum):
     NOT_STARTED = "not_started"
     IN_PROGRESS = "in_progress"
     DONE = "done"
+    ARCHIVED = "archived"
     SKIPPED = "skipped"
 
 
@@ -22,15 +23,31 @@ class TaskMode(str, Enum):
     FAMILY = "family"
 
 
+class TaskSource(str, Enum):
+    """Which Notion database the task came from."""
+    TASKS = "tasks"
+    CHORES = "chores"
+    MANUAL = "manual"
+
+
 class TaskCategory(str, Enum):
+    """Room-based categories matching Notion Chores 'Rooms' property."""
     KITCHEN = "kitchen"
-    LAUNDRY = "laundry"
-    TOYS = "toys"
-    CLEANING = "cleaning"
-    BEDTIME = "bedtime"
-    SCHOOL = "school"
+    DINING_ROOM = "dining_room"
+    LIVING_ROOM = "living_room"
+    MASTER_BEDROOM = "master_bedroom"
+    MASTER_BATHROOM = "master_bathroom"
+    BATHROOM = "bathroom"
+    OFFICE = "office"
+    STAIRWELL = "stairwell"
     OUTDOOR = "outdoor"
-    ADMIN = "admin"
+    GENERAL = "general"
+
+
+class Priority(str, Enum):
+    LOW = "low"
+    MEDIUM = "medium"
+    HIGH = "high"
 
 
 class TimeWindow(str, Enum):
@@ -41,9 +58,14 @@ class TimeWindow(str, Enum):
 
 
 class Recurrence(str, Enum):
+    """Matches Notion Chores 'Frequency' property."""
     DAILY = "daily"
     WEEKLY = "weekly"
+    BI_WEEKLY = "bi_weekly"
     MONTHLY = "monthly"
+    SEASONALLY = "seasonally"
+    SEMI_ANNUALLY = "semi_annually"
+    ANNUALLY = "annually"
     ONCE = "once"
 
 
@@ -53,14 +75,18 @@ class TaskDB(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     notion_id = Column(String, unique=True, nullable=True, index=True)
+    source = Column(String, default=TaskSource.MANUAL)
     title = Column(String, nullable=False)
     assigned_to = Column(String, nullable=True)
     mode = Column(String, default=TaskMode.ADULT)
-    category = Column(String, default=TaskCategory.CLEANING)
+    category = Column(String, default=TaskCategory.GENERAL)
     status = Column(String, default=TaskStatus.NOT_STARTED)
+    priority = Column(String, default=Priority.MEDIUM)
     recurrence = Column(String, default=Recurrence.ONCE)
     due_date = Column(Date, nullable=True)
     time_window = Column(String, default=TimeWindow.ANYTIME)
+    project_name = Column(String, nullable=True)  # Room/project from Notion Projects
+    rooms = Column(String, nullable=True)          # JSON list of rooms from Chores DB
     difficulty = Column(Integer, default=1)
     points = Column(Integer, default=1)
     kid_friendly = Column(Boolean, default=False)
@@ -77,11 +103,15 @@ class TaskDB(Base):
 class TaskBase(BaseModel):
     title: str
     assigned_to: Optional[str] = None
+    source: TaskSource = TaskSource.MANUAL
     mode: TaskMode = TaskMode.ADULT
-    category: TaskCategory = TaskCategory.CLEANING
+    category: TaskCategory = TaskCategory.GENERAL
+    priority: Priority = Priority.MEDIUM
     recurrence: Recurrence = Recurrence.ONCE
     due_date: Optional[date] = None
     time_window: TimeWindow = TimeWindow.ANYTIME
+    project_name: Optional[str] = None
+    rooms: Optional[str] = None
     difficulty: int = 1
     points: int = 1
     kid_friendly: bool = False
@@ -101,6 +131,7 @@ class TaskUpdate(BaseModel):
     status: Optional[TaskStatus] = None
     mode: Optional[TaskMode] = None
     category: Optional[TaskCategory] = None
+    priority: Optional[Priority] = None
     due_date: Optional[date] = None
     time_window: Optional[TimeWindow] = None
     difficulty: Optional[int] = None

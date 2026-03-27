@@ -3,7 +3,8 @@ from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
     notion_api_key: str = ""
-    notion_tasks_db_id: str = ""
+    notion_tasks_db_id: str = ""       # "Tasks" DB (bfe5382f...)
+    notion_chores_db_id: str = ""      # "Chores" DB (27e93b58...)
     notion_members_db_id: str = ""
     database_url: str = "sqlite:///./family_home.db"
     sync_interval_minutes: int = 5

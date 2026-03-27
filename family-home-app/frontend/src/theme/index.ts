@@ -36,9 +36,7 @@ export const colors = {
   toys: '#DDA0DD',
   cleaning: '#98D8C8',
   bedtime: '#B8A9C9',
-  school: '#F7DC6F',
   outdoor: '#82E0AA',
-  admin: '#AEB6BF',
 
   // Misc
   border: '#F0E6D8',
