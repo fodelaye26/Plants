@@ -1,7 +1,7 @@
 import { FamilyBoard, FamilyMember, Reminder, ReminderTone, Task } from '../types';
 
-// Update this to your backend URL
-const BASE_URL = 'http://localhost:8000/api';
+// Set this via EXPO_PUBLIC_API_URL env var or update directly
+const BASE_URL = process.env.EXPO_PUBLIC_API_URL || 'http://localhost:8000/api';
 
 async function request<T>(path: string, options?: RequestInit): Promise<T> {
   const res = await fetch(`${BASE_URL}${path}`, {
