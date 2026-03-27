@@ -10,6 +10,12 @@ class Settings(BaseSettings):
     sync_interval_minutes: int = 5
     app_env: str = "development"
 
+    # AWS S3 configuration (credentials optional when using IAM roles on EC2)
+    aws_s3_bucket: str = ""
+    aws_s3_region: str = "us-east-1"
+    aws_access_key_id: str = ""
+    aws_secret_access_key: str = ""
+
     model_config = {"env_file": ".env", "env_file_encoding": "utf-8"}
 
 

@@ -17,6 +17,11 @@
       "env": {
         "EXPO_PUBLIC_API_URL": "https://your-backend.railway.app/api"
       }
+    },
+    "aws": {
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://your-ec2-instance.amazonaws.com/api"
+      }
     }
   },
   "submit": {

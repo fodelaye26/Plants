@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from .database import init_db
-from .routers import family, reminders, sync, tasks
+from .routers import assets, family, reminders, sync, tasks
 
 
 @asynccontextmanager
@@ -32,6 +32,7 @@ app.include_router(tasks.router, prefix="/api")
 app.include_router(family.router, prefix="/api")
 app.include_router(reminders.router, prefix="/api")
 app.include_router(sync.router, prefix="/api")
+app.include_router(assets.router, prefix="/api")
 
 
 @app.get("/")
