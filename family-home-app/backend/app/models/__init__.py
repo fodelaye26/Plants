@@ -1,5 +1,5 @@
-from .family_member import FamilyMember
-from .reminder import Reminder
-from .task import Task
+from .family_member import FamilyMemberDB
+from .reminder import ReminderDB
+from .task import TaskDB
 
-__all__ = ["Task", "FamilyMember", "Reminder"]
+__all__ = ["TaskDB", "FamilyMemberDB", "ReminderDB"]
